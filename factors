@@ -1,7 +1,18 @@
 #!/usr/bin/python3
 """
-Prints the factorization of a given number into two smaller numbers.
-"""
+    Module n to read numbers from a file and print their factorization.
+
+    Usage: ./factors <file>
+        where <file> is a file containing natural numbers to factor.
+        One number per line
+        You can assume that all lines will be valid natural numbers greater than 1
+        You can assume that there will be no empty line, and no space before
+        and after the valid number
+        The file will always end with a new line
+
+    Returns:
+        None
+    """
 from sys import argv, stderr, exit
 from math import sqrt
 

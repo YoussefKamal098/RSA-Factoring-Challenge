@@ -1,7 +1,18 @@
 #!/usr/bin/python3
+"""
+    Module to read numbers from a file and print
+    their prime factorization.
+
+    Usage: ./rsa <file>
+        where <file> is a file containing natural numbers to factor.
+        One number per line
+
+    Returns:
+        None
+"""
+
 from sys import argv, stderr, exit
 from math import sqrt
-
 
 def print_prime_factors(num):
     """
