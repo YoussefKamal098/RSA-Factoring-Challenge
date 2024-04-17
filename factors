@@ -10,7 +10,11 @@ def print_two_smaller_product(num):
         print("{}*2".format(num//2))
         return
 
-    for i in range(3, int(sqrt(num)) + 2, 2):
+    sqn = int(sqrt(num))
+    if sqn % 2 == 0:
+        sqn += 1
+
+    for i in range(3, sqn + 1, 2):
         if num % i == 0:
             print("{:d}*{:d}".format(num//i, i))
             return

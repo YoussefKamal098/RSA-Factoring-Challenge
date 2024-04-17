@@ -11,7 +11,11 @@ def print_prime_factors(num):
         primes.append(2)
         num //= 2
 
-    for i in range(3, int(sqrt(num)) + 2, 2):
+    sqn = int(sqrt(num))
+    if sqn % 2 == 0:
+        sqn += 1
+
+    for i in range(3, sqn + 1, 2):
         while num % i == 0:
             primes.append(i)
             num //= i
