@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+from sys import argv, stderr, exit
+from math import sqrt
+
+
+def print_prime_factors(num):
+    print("{}=".format(num), end="")
+    primes = []
+
+    while num % 2 == 0:
+        primes.append(2)
+        num //= 2
+
+    for i in range(3, int(sqrt(num)) + 2, 2):
+        while num % i == 0:
+            primes.append(i)
+            num //= i
+
+    if num > 2:
+        primes.append(num)
+
+    for i in reversed(range(len(primes))):
+        print(primes[i], end="")
+        print("" if i == 0 else "*", end="")
+
+    print()
+
+
+def main():
+    if len(argv) != 2:
+        stderr.write("Usage: ./rsa <file>\n")
+        exit()
+
+    try:
+        file = open(argv[1], "r")
+        for line in file:
+            print_prime_factors(int(line))
+    except OSError as err:
+        print(err)
+    except ValueError as err:
+        print(err)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
