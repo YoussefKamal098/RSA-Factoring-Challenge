@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+from sys import argv, stderr, exit
+from math import sqrt
+
+
+def print_two_smaller_product(num):
+    print("{:d}=".format(num), end="")
+
+    if num % 2 == 0:
+        print("{}*2".format(num//2))
+        return
+
+    for i in range(3, int(sqrt(num)) + 2, 2):
+        if num % i == 0:
+            print("{:d}*{:d}".format(num//i, i))
+            return
+
+    print("{:d}*1".format(num, num))
+
+
+def main():
+    if len(argv) != 2:
+        stderr.write("Usage: ./factors <file>\n")
+        exit()
+
+    try:
+        file = open(argv[1], "r")
+        for line in file:
+            print_two_smaller_product(int(line))
+    except OSError as err:
+        print(err)
+    except ValueError as err:
+        print(err)
+
+
+if __name__ == "__main__":
+    main()
