@@ -1,53 +1,26 @@
 #!/usr/bin/python3
-from sys import argv, stderr, exit
-from math import sqrt
+import sys
 
 
-def print_prime_factors(num):
-    print("{}=".format(num), end="")
-    primes = []
-
-    while num % 2 == 0:
-        primes.append(2)
-        num //= 2
-
-    i = 3
-    while i <= int(sqrt(num)):
-        while num % i == 0:
-            primes.append(i)
-            num //= i
-        i += 2
-
-    if num > 2:
-        primes.append(num)
-
-    for i in reversed(range(len(primes))):
-        print(primes[i], end="")
-        print("" if i == 0 else "*", end="")
-
-    print()
-
-
-def main():
-    if len(argv) != 2:
-        stderr.write("Usage: ./rsa <file>\n")
-        exit()
-
+def factorize():
     try:
-        file = open(argv[1], "r")
-        for line in file:
-            print_prime_factors(int(line))
+        file = sys.argv[1]
+        with open(file) as f:
+            for line_number in f:
+                line_number = int(line_number)
+                if line_number % 2 == 0:
+                        print("{}={}*{}".format(line_number, line_number // 2, 2))
+                        continue
+                i = 3
+                while i < line_number // 2:
+                    if line_number % i == 0:
+                        print("{}={}*{}".format(line_number, line_number // i, i))
+                        break
+                    i = i + 2
+                if i == (line_number // 2) + 1:
+                    print("{}={}*{}".format(line_number, line_number, 1))
+    except IndexError:
+        pass
 
-        file.close()
-    except OSError as err:
-        print(err)
-    except ValueError as err:
-        print(err)
 
-
-if __name__ == "__main__":
-    main()
-
-
-
-
+factorize()
