@@ -1,26 +1,66 @@
 #!/usr/bin/python3
-import sys
+from sys import argv, stderr, exit
+from math import sqrt
 
 
-def factorize():
+def print_prime_factors(num):
+    """
+    Prints the prime factorization of a given number.
+
+    Args:
+        num (int): The number to factorize.
+
+    Returns:
+        None
+    """
+    print("{}=".format(num), end="")
+    primes = []
+
+    while num % 2 == 0:
+        primes.append(2)
+        num //= 2
+
+    for i in range(3, int(sqrt(num)) + 1, 2):
+        while num % i == 0:
+            primes.append(i)
+            num //= i
+
+    if num > 2:
+        primes.append(num)
+
+    for i in reversed(range(len(primes))):
+        print(primes[i], end="")
+        print("" if i == 0 else "*", end="")
+
+    print()
+
+
+def main():
+    """
+    Main function to read numbers from a file and print
+    their prime factorization.
+
+    Usage: ./rsa <file>
+        where <file> is a file containing natural numbers to factor.
+        One number per line
+
+    Returns:
+        None
+    """
+    if len(argv) != 2:
+        stderr.write("Usage: ./rsa <file>\n")
+        exit()
+
     try:
-        file = sys.argv[1]
-        with open(file) as f:
-            for line_number in f:
-                line_number = int(line_number)
-                if line_number % 2 == 0:
-                        print("{}={}*{}".format(line_number, line_number // 2, 2))
-                        continue
-                i = 3
-                while i < line_number // 2:
-                    if line_number % i == 0:
-                        print("{}={}*{}".format(line_number, line_number // i, i))
-                        break
-                    i = i + 2
-                if i == (line_number // 2) + 1:
-                    print("{}={}*{}".format(line_number, line_number, 1))
-    except IndexError:
-        pass
+        file = open(argv[1], "r")
+        for line in file:
+            print_prime_factors(int(line))
+    except OSError as err:
+        print(err)
+    except ValueError as err:
+        print(err)
 
 
-factorize()
+if __name__ == "__main__":
+    main()
+
