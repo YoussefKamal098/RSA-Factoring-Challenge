@@ -3,56 +3,29 @@ from sys import argv, stderr, exit
 from math import sqrt
 
 
-def is_prime(n):
-    if n <= 1:
-        return False
-    if n <= 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return False
-        i += 6
-    return True
+def print_prime_factors(num):
+    print("{}=".format(num), end="")
+    primes = []
 
+    while num % 2 == 0:
+        primes.append(2)
+        num //= 2
 
-def find_prime_factors(n):
-    for i in range(2, int(sqrt(n)) + 1):
-        if n % i == 0:
-            factor1 = i
-            factor2 = n // i
-            if is_prime(factor1) and is_prime(factor2):
-                return factor1, factor2
+    i = 3
+    while i <= int(sqrt(num)):
+        while num % i == 0:
+            primes.append(i)
+            num //= i
+        i += 2
 
-    return None, None
+    if num > 2:
+        primes.append(num)
 
-# def print_prime_factors(num):
-#     print("{}=".format(num), end="")
-#     primes = []
-#
-#     while num % 2 == 0:
-#         primes.append(2)
-#         num //= 2
-#
-#     sqn = int(sqrt(num))
-#     if sqn % 2 == 0:
-#         sqn += 1
-#
-#     for i in range(3, sqn + 1, 2):
-#         while num % i == 0:
-#             primes.append(i)
-#             num //= i
-#
-#     if num > 2:
-#         primes.append(num)
-#
-#     for i in reversed(range(len(primes))):
-#         print(primes[i], end="")
-#         print("" if i == 0 else "*", end="")
-#
-#     print()
+    for i in reversed(range(len(primes))):
+        print(primes[i], end="")
+        print("" if i == 0 else "*", end="")
+
+    print()
 
 
 def main():
@@ -62,9 +35,10 @@ def main():
 
     try:
         file = open(argv[1], "r")
-        n = int(file.readline())
-        p, q = find_prime_factors(n)
-        print("{}={}*{}".format(n, q, p))
+        for line in file:
+            print_prime_factors(int(line))
+
+        file.close()
     except OSError as err:
         print(err)
     except ValueError as err:
