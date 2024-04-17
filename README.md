@@ -57,7 +57,7 @@ $ ./factors tests/test00
 49=7*7
 239809320265259=15485783*15485773
 ```
-[rsa](./rsa)
+[factors](./factors)
 
 ### RSA Factoring Challenge
 
@@ -103,7 +103,7 @@ $ cat tests/rsa-16
 $ ./rsa tests/rsa-16
 2497885147362973=49979141*49978553
 ```
-[factors](./factors)
+[rsa](./rsa)
 
 ### Prime Factorization
 Prime factorization is the process of finding the prime numbers that multiply together to give a particular composite number. It is a fundamental concept in number theory and plays a crucial role in cryptography, particularly in the RSA encryption algorithm.
