@@ -9,10 +9,8 @@
         You can assume that there will be no empty line, and no space before
         and after the valid number
         The file will always end with a new line
+"""
 
-    Returns:
-        None
-    """
 from sys import argv, stderr, exit
 from math import sqrt
 

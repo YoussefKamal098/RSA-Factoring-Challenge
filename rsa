@@ -6,9 +6,6 @@
     Usage: ./rsa <file>
         where <file> is a file containing natural numbers to factor.
         One number per line
-
-    Returns:
-        None
 """
 
 from sys import argv, stderr, exit
